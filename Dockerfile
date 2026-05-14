@@ -17,4 +17,4 @@ RUN pip install --no-cache-dir \
     notebook==7.2.2 \
     jupyter==1.1.1
 
-CMD ["jupyter", "nbconvert", "--to", "notebook", "--execute", "Sleep_health_and_lifestyle_dataset.ipynb", "--output", "Repo_1.ipynb"]
+CMD ["jupyter", "nbconvert", "--to", "notebook", "--execute", "Sleep_Health_and_Lifestyle_Dataset.ipynb", "--output", "Repo_1.ipynb"]
