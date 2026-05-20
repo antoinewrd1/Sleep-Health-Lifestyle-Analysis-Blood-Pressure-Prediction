@@ -24,7 +24,7 @@ def get_parameter_grids():
             "model__kernel": ["rbf"],
             "model__C": [1, 10],
             "model__gamma": ["scale", "auto"],
-            "model_epsilon": [0.1, 0.2]
+            "model__epsilon": [0.1, 0.2]
         }
     }
 

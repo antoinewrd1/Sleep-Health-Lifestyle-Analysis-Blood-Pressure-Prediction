@@ -1,8 +1,24 @@
-# 13. SAVE OUTPUTS
+from pathlib import Path
+import joblib
 
-cv_results_df.to_csv("cross_validation_results.csv", index=False)
-test_results_df.to_csv("test_results.csv", index = False)
 
-print("\nSaved Files:")
-print("- cross_validation_results.csv")
-print("- test_results.csv")
+def save_model(model, path):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    joblib.dump(model, path)
+
+    return path
+
+
+def save_dataframe(df, path):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    df.to_csv(path, index=False)
+
+    return path
+
+
+def save_predictions(predictions_df, path):
+    return save_dataframe(predictions_df, path)
