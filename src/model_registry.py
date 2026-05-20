@@ -1,15 +1,18 @@
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.svm import SVR
+from sklearn.dummy import DummyRegressor
 
 def get_model_registry(random_state=42):
     return {
+        "Baseline": DummyRegressor(strategy="mean"),
         "Random Forest": RandomForestRegressor(random_state=random_state),
         "Gradient Boosting": GradientBoostingRegressor(random_state=random_state),
-        "SVR": SVR()
+        "SVR": SVR(),
     }
 
 def get_parameter_grids():
     return {
+	"Baseline": {},
         "Random Forest": {
             "model__n_estimators": [100, 200],
             "model__max_depth": [None, 5, 10],

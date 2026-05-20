@@ -52,17 +52,21 @@ def run_data_quality_checks(df):
 def validate_numeric_ranges(df, range_rules):
     violations = {}
 
-    for column, (minimum, maximum) in range_rules.items():
-        if column in df.columns:
-            invalid_count = (
-                (df[column] < minimum) |
-                (df[column] > maximum)
-            ).sum()
+    for column, bounds in range_rules.items():
+        if column not in df.columns:
+            continue
 
-            if invalid_count > 0:
-                violations[column] = int(invalid_count)
+        minimum, maximum = bounds
 
-        if violations:
-            raise ValueError(f"Numeric range violations detected: {violations}")
+        invalid_count = (
+            (df[column] < minimum) |
+            (df[column] > maximum)
+        ).sum()
 
-        return True
+        if invalid_count > 0:
+            violations[column] = int(invalid_count)
+
+    if violations:
+        raise ValueError(f"Numeric range violations detected: {violations}")
+
+    return True

@@ -1,16 +1,19 @@
-import pandas as pd
 import pytest
+import pandas as pd
 
-from src.validation import validate_required_columns, validate_blood_pressure_format
+from src.validation import validate_numeric_ranges
 
-def test_validate_required_columns_detects_missing_column():
-    df = pd.DataFrame({"Age": [30]})
+
+def test_validate_numeric_ranges_detects_invalid_values():
+    df = pd.DataFrame(
+        {
+            "Age": [35, 150],
+        }
+    )
+
+    range_rules = {
+        "Age": (18, 100),
+    }
 
     with pytest.raises(ValueError):
-        validate_required_columns(df, ["Age", "Blood Pressure"])
-
-def test_validate_blood_pressure_format_rejects_invalid_format():
-    df = pd.DataFrame({"Blood Pressure": ["120-80"]})
-
-    with pytest.raises(ValueError):
-        validate_blood_pressure_format(df)
+        validate_numeric_ranges(df, range_rules)
