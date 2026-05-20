@@ -3,7 +3,7 @@ import pandas as pd
 
 def load_data(file_path):
 	filePath = Path(
-    	r"C:\Users\antoi\Downloads\archive (3)\Sleep_Health_and_Lifestyle_Dataset.csv"
+    	r"C:\Users\antoi\Repos\Sleep-Health-Lifestyle-Analysis-Blood-Pressure-Prediction\Sleep_Health_and_Lifestyle_Dataset.csv"
 	)
 
 	if not filePath.exists():

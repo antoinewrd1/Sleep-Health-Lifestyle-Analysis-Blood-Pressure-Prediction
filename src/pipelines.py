@@ -3,52 +3,34 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.impute import SimpleImputer
 
-numericFeatures = X.select_dtypes(include=["int64", "float64"]).columns.tolist()
-categoricalFeatures = X.select_dtypes(include=["object", "category", "bool"]).columns.tolist()
+def identify_feature_types(X):
+	numeric_features = X.select_dtypes(include=["int64", "float64"]).columns.tolist()
 
-numericPipeline = Pipeline(
-    steps=[
-        ("imputer", SimpleImputer(strategy="median")),
-        ("scaler", StandardScaler())
-    ]
-)
+	categorical_features = X.select_dtypes(include=["object", "category", "bool"]).columns.tolist()
 
-categoricalPipeline = Pipeline(
-    steps=[
-        ("imputer", SimpleImputer(strategy="most_frequent")),
-        ("encoder", OneHotEncoder(handle_unknown="ignore"))
-    ]
-)
+	return numeric_features, categorical_features
+
+def build_preprocessor(numeric_features, categorical_features):
+
+	numeric_pipeline = Pipeline(
+    		steps=[
+        		("imputer", SimpleImputer(strategy="median")),
+        		("scaler", StandardScaler())
+    		]
+	)
+
+	categorical_pipeline = Pipeline(
+    		steps=[
+        		("imputer", SimpleImputer(strategy="most_frequent")),
+        		("encoder", OneHotEncoder(handle_unknown="ignore"))
+    		]
+	)
 
 
-preprocessor = ColumnTransformer(
-    transformers=[
-        ("numeric", numericPipeline, numericFeatures),
-        ("categorical", categoricalPipeline, categoricalFeatures)
-    ]
-)
+	return ColumnTransformer(
+    		transformers=[
+        		("numeric", numeric_pipeline, numeric_features),
+        		("categorical", categorical_pipeline, categorical_features)
+    		]
+	)
 
-# 6. MODEL PIPELINES
-
-models = {
-    "Random Forest": Pipeline(
-        steps=[
-            ("preprocessor", preprocessor),
-            ("model", RandomForestRegressor(random_state=42))
-        ]
-    ),
-
-    "Gradient Boosting": Pipeline(
-        steps=[
-            ("preprocessor", preprocessor),
-            ("model", GradientBoostingRegressor(random_state=42))
-        ]
-    ),
-
-    "SVR": Pipeline(
-        steps=[
-            ("preprocessor", preprocessor),
-            ("model", SVR())
-        ]
-    ),
-}
