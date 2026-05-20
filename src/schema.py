@@ -1,4 +1,4 @@
-required_columns = [
+REQUIRED_COLUMNS = [
     "Person ID",
     "Gender",
     "Age",
@@ -11,10 +11,11 @@ required_columns = [
     "Blood Pressure",
     "Heart Rate",
     "Daily Steps",
-    "Sleep Disorder"
+    "Sleep Disorder",
 ]
 
-numeric_range_rules = {
+
+NUMERIC_RANGE_RULES = {
     "Age": (18, 100),
     "Sleep Duration": (0, 24),
     "Quality of Sleep": (1, 10),
