@@ -1,3 +1,10 @@
+from fastapi import Depends, UploadFile, File
+import pandas as pd
+import tempfile
+
+from src.auth.security import verify_api_key
+from src.admin.admin_service import AdminService
+from src.jobs.batch_prediction_job import BatchPredictionJob
 from fastapi import APIRouter
 
 from src.api.schemas import (
@@ -87,4 +94,38 @@ def latest_report():
 
     return {
         "report_path": str(report_path)
+    }
+
+@router.get("/admin/summary", dependencies=[Depends(verify_api_key)])
+def admin_summary():
+    service = AdminService()
+
+    return service.get_prediction_summary()
+
+
+@router.post("/admin/report", dependencies=[Depends(verify_api_key)])
+def admin_report():
+    service = AdminService()
+
+    report_path = service.generate_admin_report()
+
+    return {
+        "report_path": str(report_path)
+    }
+
+
+@router.post("/batch-predict", dependencies=[Depends(verify_api_key)])
+def batch_predict(file: UploadFile = File(...)):
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".csv") as temp_input:
+        temp_input.write(file.file.read())
+        temp_input_path = temp_input.name
+
+    output_path = "outputs/api_batch_predictions.csv"
+
+    job = BatchPredictionJob()
+    result_df = job.run(temp_input_path, output_path)
+
+    return {
+        "rows_scored": len(result_df),
+        "output_path": output_path,
     }
