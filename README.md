@@ -1,84 +1,84 @@
-# Sleep Health \& Lifestyle Blood Pressure Prediction
+# Sleep Health \& Lifestyle Blood Pressure Prediction Platform
 
 # Overview
 
 # 
 
-# This project is a modular machine learning pipeline for predicting systolic blood pressure using sleep health and lifestyle data. The repository was refactored from an exploratory Jupyter notebook into a production-style Python project with reusable modules, automated testing, configuration management, reporting utilities, monitoring tools, Docker support, and CI workflows.
+# This repository is a modular machine learning engineering platform for predicting systolic blood pressure using sleep health and lifestyle data. The project evolved from a single exploratory Jupyter notebook into a production-style application with:
 
 # 
 
-# The project demonstrates end-to-end machine learning engineering practices including:
+# reusable ML pipelines
 
-# 
+# FastAPI prediction services
 
-# data loading
+# Streamlit dashboard
 
-# schema validation
+# batch prediction workflows
 
-# feature engineering
+# SQLite prediction logging
 
-# preprocessing pipelines
-
-# model training
-
-# hyperparameter tuning
-
-# evaluation
-
-# reporting
+# monitoring and drift detection
 
 # experiment tracking
 
-# monitoring
-
-# persistence
-
 # automated testing
 
-# Project Objectives
+# Docker support
+
+# CI/CD workflows
+
+# modular architecture
 
 # 
 
-# The primary objective of this project is to analyze relationships between lifestyle variables and blood pressure while demonstrating a scalable machine learning workflow.
+# The project demonstrates real-world machine learning engineering practices including:
 
 # 
 
-# The project predicts:
+# data validation
 
-# 
+# preprocessing pipelines
 
-# Systolic Blood Pressure
+# model comparison
 
-# 
+# hyperparameter tuning
 
-# using features such as:
+# prediction APIs
 
-# 
+# monitoring utilities
 
-# sleep duration
+# artifact persistence
 
-# quality of sleep
+# reporting
 
-# stress level
+# testing
 
-# physical activity
+# automation
 
-# heart rate
+# Core Features
 
-# BMI category
+# Machine Learning Pipeline
 
-# daily steps
+# End-to-end regression workflow
 
-# occupation
+# Config-driven training pipeline
 
-# sleep disorder classification
+# Feature engineering utilities
+
+# Cross-validation
+
+# Hyperparameter tuning
+
+# Multiple model comparison
+
+# Experiment tracking
 
 # Models Included
 
 # 
 
-# The project compares multiple regression models:
+# The project compares:
 
 # 
 
@@ -90,27 +90,105 @@
 
 # Support Vector Regressor (SVR)
 
-# Evaluation Metrics
+# FastAPI Prediction Service
 
 # 
 
-# Models are evaluated using:
+# The repository includes a production-style API for prediction serving.
 
 # 
 
-# Mean Absolute Error (MAE)
+# Features
 
-# Mean Squared Error (MSE)
+# REST prediction endpoint
 
-# Root Mean Squared Error (RMSE)
+# request validation
 
-# R² Score
+# JSON responses
+
+# prediction logging
+
+# interactive API documentation
+
+# Run API
+
+# uvicorn src.api.main:app --reload
+
+# Swagger Documentation
+
+# http://127.0.0.1:8000/docs
+
+# Streamlit Dashboard
 
 # 
 
-# RMSE is used as the primary comparison metric.
+# Interactive dashboard for prediction visualization and inference.
 
 # 
+
+# Features
+
+# interactive sliders
+
+# prediction visualization
+
+# real-time inference
+
+# tabular summaries
+
+# Run Dashboard
+
+# streamlit run src/dashboard/app.py
+
+# Batch Prediction Workflow
+
+# 
+
+# Supports running predictions against entire CSV datasets.
+
+# 
+
+# Features
+
+# CSV batch inference
+
+# output prediction files
+
+# reusable prediction workflows
+
+# 
+
+# Main utility:
+
+# 
+
+# src/batch\_predict.py
+
+# SQLite Prediction Logging
+
+# 
+
+# Prediction requests are automatically stored in SQLite.
+
+# 
+
+# Stored Information
+
+# prediction timestamp
+
+# model name
+
+# input payload
+
+# prediction result
+
+# 
+
+# Database utilities:
+
+# 
+
+# src/database/db.py
 
 # Repository Structure
 
@@ -190,7 +268,31 @@
 
 # ├── src/
 
+# │   ├── api/
+
+# │   │   ├── \_\_init\_\_.py
+
+# │   │   └── main.py
+
+# │   │
+
+# │   ├── dashboard/
+
+# │   │   └── app.py
+
+# │   │
+
+# │   ├── database/
+
+# │   │   ├── \_\_init\_\_.py
+
+# │   │   └── db.py
+
+# │   │
+
 # │   ├── \_\_init\_\_.py
+
+# │   ├── batch\_predict.py
 
 # │   ├── config\_loader.py
 
@@ -232,9 +334,15 @@
 
 # ├── tests/
 
+# │   ├── test\_api.py
+
+# │   ├── test\_batch\_predict.py
+
 # │   ├── test\_config\_loader.py
 
 # │   ├── test\_data\_profile.py
+
+# │   ├── test\_database.py
 
 # │   ├── test\_evaluation.py
 
@@ -294,14 +402,6 @@
 
 # data/Sleep\_Health\_and\_Lifestyle\_Dataset.csv
 
-# 
-
-# using reusable utilities in:
-
-# 
-
-# src/data\_loader.py
-
 # 2\. Data Validation
 
 # 
@@ -312,31 +412,21 @@
 
 # required columns
 
-# missing values
+# schema validation
 
-# duplicate rows
+# numeric range checks
 
 # blood pressure formatting
 
-# numeric range validation
+# duplicate row detection
 
-# schema consistency
-
-# 
-
-# Validation logic is stored in:
-
-# 
-
-# src/validation.py
-
-# src/schema.py
+# feature drift monitoring
 
 # 3\. Feature Engineering
 
 # 
 
-# The pipeline performs transformations including:
+# Transformations include:
 
 # 
 
@@ -346,27 +436,13 @@
 
 # Diastolic
 
-# filling missing Sleep Disorder values
+# missing value handling
 
-# preprocessing categorical variables
+# categorical encoding
 
-# scaling numeric features
-
-# 
-
-# Feature engineering logic is located in:
-
-# 
-
-# src/feature\_engineering.py
+# numeric scaling
 
 # 4\. Pipeline Construction
-
-# 
-
-# Preprocessing pipelines include:
-
-# 
 
 # Numeric Pipeline
 
@@ -380,29 +456,23 @@
 
 # one-hot encoding
 
-# 
-
-# Pipeline utilities are stored in:
-
-# 
-
-# src/pipelines.py
-
 # 5\. Model Training
 
 # 
 
-# The project trains multiple candidate models using reusable model registries and parameter grids.
+# The pipeline supports:
 
 # 
 
-# Training utilities include:
+# baseline comparison
 
-# 
+# model registries
 
-# src/model\_registry.py
+# reusable parameter grids
 
-# src/evaluation.py
+# cross-validation
+
+# hyperparameter tuning
 
 # 6\. Monitoring \& Drift Detection
 
@@ -414,65 +484,9 @@
 
 # schema comparison
 
-# numeric drift detection
+# feature drift detection
 
 # prediction distribution summaries
-
-# 
-
-# Monitoring utilities are located in:
-
-# 
-
-# src/monitoring.py
-
-# Configuration Management
-
-# 
-
-# Configuration is handled through:
-
-# 
-
-# config/model\_config.json
-
-# 
-
-# Example configuration:
-
-# 
-
-# {
-
-# &#x20; "target\_column": "Systolic",
-
-# &#x20; "drop\_columns": \[
-
-# &#x20;   "Systolic",
-
-# &#x20;   "Diastolic"
-
-# &#x20; ],
-
-# &#x20; "test\_size": 0.2,
-
-# &#x20; "random\_state": 42,
-
-# &#x20; "cv\_folds": 5,
-
-# &#x20; "models": \[
-
-# &#x20;   "Baseline",
-
-# &#x20;   "Random Forest",
-
-# &#x20;   "Gradient Boosting",
-
-# &#x20;   "SVR"
-
-# &#x20; ]
-
-# }
 
 # Running the Project
 
@@ -488,63 +502,51 @@
 
 # pip install -r requirements.txt
 
-# Run Training Pipeline
+# Run ML Pipeline
 
 # python train.py
 
-# Running Tests
+# Run API
 
-# 
+# uvicorn src.api.main:app --reload
 
-# The project uses pytest for automated testing.
+# Run Dashboard
 
-# 
+# streamlit run src/dashboard/app.py
 
-# Run Test Suite
+# Run Tests
 
 # python -m pytest
 
-# PowerShell Automation Scripts
-
-# 
-
-# The repository includes automation scripts for project validation.
-
-# 
-
-# Run Full Pipeline
-
-# .\\scripts\\full\_pipeline.ps1
-
-# Run Health Checks
+# Run PowerShell Health Checks
 
 # .\\scripts\\health\_check.ps1
 
 # Docker Support
 
-# Build Docker Image
+# Build Image
 
-# docker build -t sleep-health-analysis .
+# docker build -t sleep-health-platform .
 
-# Run Docker Container
+# Run Container
 
-# docker run sleep-health-analysis
+# docker run sleep-health-platform
 
 # Continuous Integration
 
 # 
 
-# GitHub Actions automatically runs the pytest suite on:
+# GitHub Actions automatically runs:
 
 # 
 
-# pushes
+# pytest suite
 
-# pull requests
+# repository validation
 
 # 
 
-# Workflow configuration:
+# Workflow:
 
 # 
 
@@ -554,7 +556,7 @@
 
 # 
 
-# The project may generate:
+# Generated artifacts may include:
 
 # 
 
@@ -566,7 +568,7 @@
 
 # 
 
-# Potential artifacts include:
+# Example artifacts:
 
 # 
 
@@ -584,6 +586,58 @@
 
 # trained model artifacts
 
+# Testing Strategy
+
+# 
+
+# The repository includes automated tests for:
+
+# 
+
+# API endpoints
+
+# batch prediction
+
+# monitoring utilities
+
+# persistence
+
+# reporting
+
+# pipelines
+
+# feature engineering
+
+# validation
+
+# experiment tracking
+
+# database logging
+
+# Monitoring Strategy
+
+# 
+
+# Monitoring utilities support:
+
+# 
+
+# schema drift
+
+# feature drift
+
+# prediction summaries
+
+# monitoring metadata
+
+# 
+
+# Documentation:
+
+# 
+
+# docs/monitoring\_plan.md
+
 # Experiment Tracking
 
 # 
@@ -598,39 +652,9 @@
 
 # timestamps
 
+# dataset statistics
+
 # training row counts
-
-# 
-
-# Tracking utilities are located in:
-
-# 
-
-# src/experiment\_tracker.py
-
-# src/model\_metadata.py
-
-# Monitoring Strategy
-
-# 
-
-# The project includes lightweight monitoring utilities for:
-
-# 
-
-# schema drift
-
-# feature drift
-
-# prediction summaries
-
-# 
-
-# Monitoring documentation:
-
-# 
-
-# docs/monitoring\_plan.md
 
 # Documentation
 
@@ -654,11 +678,13 @@
 
 # deployment notes
 
-# model card
-
 # artifact strategy
 
+# model card
+
 # data dictionary
+
+# monitoring plan
 
 # Reproducibility
 
@@ -668,17 +694,19 @@
 
 # 
 
-# pinned package versions
+# pinned dependency versions
 
 # Docker support
 
-# configuration-driven workflows
-
-# relative file paths
+# config-driven execution
 
 # automated testing
 
 # CI workflows
+
+# relative file paths
+
+# experiment tracking
 
 # Future Improvements
 
@@ -692,19 +720,19 @@
 
 # SHAP explainability
 
-# feature importance dashboards
-
-# advanced drift monitoring
-
-# model serving API
-
-# scheduled retraining
-
 # cloud deployment
 
 # Airflow orchestration
 
 # Databricks integration
+
+# feature store support
+
+# model registry versioning
+
+# scheduled retraining
+
+# streaming inference
 
 # Disclaimer
 
@@ -714,5 +742,5 @@
 
 # 
 
-# The models in this project are not intended for clinical diagnosis or medical decision-making.
+# The models included are not intended for clinical diagnosis or medical decision-making.
 
